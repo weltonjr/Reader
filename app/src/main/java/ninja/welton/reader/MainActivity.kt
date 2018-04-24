@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 		return when (item.itemId) {
 			R.id.action_settings -> {
 				supportFragmentManager.beginTransaction().also {
+					it.addToBackStack("HOME")
 					it.replace(R.id.main_content, SettingsFragment())
 				}.commit()
 				true
