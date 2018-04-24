@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Reader</string>
+    <string name="app_subtitle">Aprocimando escritores de leitores</string>
+
+
+
+    <string name="action_settings">Configurações</string>
+    <string name="action_libraries">Bibliotecas</string>
+    <string name="action_books">Livros</string>
+    <string name="action_chapter">Capitulos</string>
+</resources>
