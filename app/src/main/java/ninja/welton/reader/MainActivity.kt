@@ -10,8 +10,6 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.content_main.*
-import org.jetbrains.anko.intentFor
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -24,15 +22,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 		setContentView(R.layout.activity_main)
 		setSupportActionBar(toolbar)
 
+		supportFragmentManager.beginTransaction().also {
+			it.replace(R.id.main_content, HomeFragment(), "HOME")
+		}.commit()
+
 		ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close).also {
 			drawer_layout.addDrawerListener(it)
 		}.syncState()
 
 		nav_view.setNavigationItemSelectedListener(this)
 
-		main_buttonStart.setOnClickListener {
-
-		}
 	}
 
 	override fun onBackPressed() {
@@ -52,7 +51,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
 		return when (item.itemId) {
 			R.id.action_settings -> {
-				startActivity(intentFor<SettingsActivity>())
+				supportFragmentManager.beginTransaction().also {
+					it.replace(R.id.main_content, SettingsFragment())
+				}.commit()
 				true
 			}
 			else -> super.onOptionsItemSelected(item)
