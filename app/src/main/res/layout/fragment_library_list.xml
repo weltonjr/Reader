@@ -6,6 +6,8 @@
 	android:name="ninja.welton.reader.LibraryFragment"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:layout_marginEnd="4dp"
+	android:layout_marginStart="4dp"
 	app:layoutManager="LinearLayoutManager"
 	tools:context="ninja.welton.reader.LibraryFragment"
 	tools:listitem="@layout/fragment_library" />

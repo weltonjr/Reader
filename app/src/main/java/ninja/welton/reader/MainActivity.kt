@@ -10,8 +10,12 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+	private var backTimer = 0L
+	private val maxTimeBettwenBackClicks = 2000
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		setTheme(when(prefs.theme){
@@ -26,6 +30,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 			it.replace(R.id.main_content, HomeFragment(), "HOME")
 		}.commit()
 
+		if(intent.extras != null && intent.extras.getBoolean("themeChange", false))	//Se for troca de tema, avança pro fragmento de configurações
+			supportFragmentManager.beginTransaction().also {
+				it.replace(R.id.main_content, SettingsFragment(), "HOME")
+			}.commit()
+
+
 		ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close).also {
 			drawer_layout.addDrawerListener(it)
 		}.syncState()
@@ -38,7 +48,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 		if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
 			drawer_layout.closeDrawer(GravityCompat.START)
 		} else {
-			super.onBackPressed()
+			if(backTimer + maxTimeBettwenBackClicks > System.currentTimeMillis())
+				super.onBackPressed()
+			else{
+				backTimer = System.currentTimeMillis()
+				toast(R.string.click_back_again)
+			}
 		}
 	}
 
@@ -57,32 +72,29 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 				}.commit()
 				true
 			}
+			R.id.action_about -> {
+				supportFragmentManager.beginTransaction().also {
+					it.addToBackStack("HOME")
+					it.replace(R.id.main_content, AboutFragment())
+				}.commit()
+				true
+			}
 			else -> super.onOptionsItemSelected(item)
 		}
 	}
 
 	override fun onNavigationItemSelected(item: MenuItem): Boolean {
-		// Handle navigation view item clicks here.
 		when (item.itemId) {
-			R.id.nav_camera -> {
-				// Handle the camera action
-			}
-			R.id.nav_gallery -> {
+			R.id.nav_library -> supportFragmentManager.beginTransaction().also {
+				it.addToBackStack("HOME")
+				it.replace(R.id.main_content, LibraryFragment())
+			}.commit()
 
-			}
-			R.id.nav_slideshow -> {
-
-			}
-			R.id.nav_manage -> {
-
-			}
-			R.id.nav_share -> {
-
-			}
-			R.id.nav_send -> {
-
-			}
-		}
+			R.id.nav_about -> supportFragmentManager.beginTransaction().also {
+				it.addToBackStack("HOME")
+				it.replace(R.id.main_content, AboutFragment())
+			}.commit()
+	}
 
 		drawer_layout.closeDrawer(GravityCompat.START)
 		return true
