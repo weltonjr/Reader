@@ -29,10 +29,6 @@ class SettingsFragment : Fragment() {
         toggle_theme.setOnClickListener{
             prefs.theme = if (toggle_theme.isChecked) Themes.Dark else Themes.Light
 
-            activity.setTheme(when(prefs.theme){
-                Themes.Light -> R.style.AppTheme
-                Themes.Dark -> R.style.AppThemeDark
-            })
             activity.finish()
             activity.startActivity(Intent(activity, MainActivity::class.java).also {
                 it.putExtra("themeChange", true)

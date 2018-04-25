@@ -27,14 +27,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 		setSupportActionBar(toolbar)
 
 		supportFragmentManager.beginTransaction().also {
-			it.replace(R.id.main_content, HomeFragment(), "HOME")
+			it.replace(R.id.main_content, HomeFragment(), "Home")
+			it.addToBackStack(null)
 		}.commit()
 
 		if(intent.extras != null && intent.extras.getBoolean("themeChange", false))	//Se for troca de tema, avança pro fragmento de configurações
 			supportFragmentManager.beginTransaction().also {
-				it.replace(R.id.main_content, SettingsFragment(), "HOME")
+				it.replace(R.id.main_content, SettingsFragment(), "Settings")
+				it.addToBackStack(null)
 			}.commit()
-
 
 		ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close).also {
 			drawer_layout.addDrawerListener(it)
@@ -48,12 +49,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 		if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
 			drawer_layout.closeDrawer(GravityCompat.START)
 		} else {
-			if(backTimer + maxTimeBettwenBackClicks > System.currentTimeMillis())
+//			if(backTimer + maxTimeBettwenBackClicks > System.currentTimeMillis())
 				super.onBackPressed()
-			else{
-				backTimer = System.currentTimeMillis()
-				toast(R.string.click_back_again)
-			}
+//			else{
+//				backTimer = System.currentTimeMillis()
+//				toast(R.string.click_back_again)
+//			}
 		}
 	}
 
@@ -67,15 +68,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 		return when (item.itemId) {
 			R.id.action_settings -> {
 				supportFragmentManager.beginTransaction().also {
-					it.addToBackStack("HOME")
-					it.replace(R.id.main_content, SettingsFragment())
+					it.replace(R.id.main_content, SettingsFragment(), "Settings")
+					it.addToBackStack(null)
 				}.commit()
 				true
 			}
 			R.id.action_about -> {
 				supportFragmentManager.beginTransaction().also {
-					it.addToBackStack("HOME")
-					it.replace(R.id.main_content, AboutFragment())
+					it.replace(R.id.main_content, AboutFragment(), "About")
+					it.addToBackStack(null)
 				}.commit()
 				true
 			}
@@ -86,13 +87,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 	override fun onNavigationItemSelected(item: MenuItem): Boolean {
 		when (item.itemId) {
 			R.id.nav_library -> supportFragmentManager.beginTransaction().also {
-				it.addToBackStack("HOME")
-				it.replace(R.id.main_content, LibraryFragment())
+				it.replace(R.id.main_content, LibraryFragment(),"Library")
+				it.addToBackStack(null)
 			}.commit()
 
 			R.id.nav_about -> supportFragmentManager.beginTransaction().also {
-				it.addToBackStack("HOME")
-				it.replace(R.id.main_content, AboutFragment())
+				it.replace(R.id.main_content, AboutFragment(), "About")
+				it.addToBackStack(null)
 			}.commit()
 	}
 
