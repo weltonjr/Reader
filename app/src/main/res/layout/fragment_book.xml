@@ -4,17 +4,20 @@
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
 	android:orientation="horizontal"
+	android:id="@+id/book_item"
 	android:paddingTop="4dp">
 
 	<ImageView
 		android:id="@+id/imageView"
-		android:layout_width="100dp"
+		android:tag="image"
+		android:layout_width="110dp"
 		android:layout_height="110dp"
 		android:layout_weight="1"
-		app:srcCompat="@color/colorPrimary_dark" />
+		app:srcCompat="@color/colorPrimary" />
 
 	<TextView
 		android:id="@+id/content"
+		android:tag="text"
 		android:layout_width="wrap_content"
 		android:layout_height="match_parent"
 		android:layout_margin="@dimen/text_margin"

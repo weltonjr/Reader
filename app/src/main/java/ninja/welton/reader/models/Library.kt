@@ -1,4 +1,12 @@
 package ninja.welton.reader.models
 
 
-data class Library (val name: String, val image: String)
+class Library (name: String, image: String): AppModel(name, image){
+
+    var Books = listOf(
+            Book("Livro 1", "http://lorempixel.com/300/300", true),
+            Book("Livro 2", "http://lorempixel.com/300/300", false),
+            Book("Livro 3", "http://lorempixel.com/300/300", false),
+            Book("Livro 4", "http://lorempixel.com/300/300", true))
+
+}

@@ -3,26 +3,41 @@ package ninja.welton.reader
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_home.*
+import ninja.welton.reader.managers.BookManager
+import ninja.welton.reader.managers.UserManager
 import org.jetbrains.anko.AnkoLogger
-
+import org.jetbrains.anko.info
 
 class HomeFragment : Fragment(), AnkoLogger {
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater!!.inflate(R.layout.fragment_home, container, false)
-
-    override fun onStart() {
-        main_buttonStart.setOnClickListener{
-            activity.supportFragmentManager.beginTransaction().also {
-                it.addToBackStack("HOME")
-                it.replace(R.id.main_content, LibraryFragment())
-            }.commit()
-        }
-        super.onStart()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater!!.inflate(R.layout.fragment_home, container, false)
+        //todo mudar fragment layout
+        if (view is RecyclerView) {
+            val context = view.getContext()
+
+            view.layoutManager = GridLayoutManager(context, 2)
+            view.adapter = ModelRecyclerViewAdapter(UserManager.getFavs(), R.id.book_item){
+                //chamar activity
+                info { "Click" }
+            }
+        }
+        return view
+    }
+
+    companion object {
+        fun newInstance(): HomeFragment {
+            return HomeFragment()
+        }
+    }
 }

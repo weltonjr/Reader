@@ -1,4 +1,4 @@
 package ninja.welton.reader.models
 
 
-data class Book (val name: String, val image: String)
+class Book(name: String, image: String, val fav: Boolean) : AppModel(name, image)

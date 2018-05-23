@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "753774901264",
+    "firebase_url": "https://reader-55e7c.firebaseio.com",
+    "project_id": "reader-55e7c",
+    "storage_bucket": "reader-55e7c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:753774901264:android:42a070ecc0bce1e2",
+        "android_client_info": {
+          "package_name": "ninja.welton.reader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "753774901264-3b0rvm5irvn7nag96107jovr2jpm2mde.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ninja.welton.reader",
+            "certificate_hash": "dda4061a7f1000c565e0049616353486a918498b"
+          }
+        },
+        {
+          "client_id": "753774901264-hlhqvis65qs0gl7k3vdr8avcias051pd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtoBf-X-UMChg0OXamW-lgDdfdnMvDh2k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "753774901264-hlhqvis65qs0gl7k3vdr8avcias051pd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,16 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import ninja.welton.reader.models.AppModel
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-import ninja.welton.reader.models.Book
 
-class BookRecyclerViewAdapter(private val mValues: List<Book>)
-    : RecyclerView.Adapter<BookRecyclerViewAdapter.ViewHolder>(), AnkoLogger {
+class ModelRecyclerViewAdapter(private val mValues: List<AppModel>, private val idView: Int, private val onClick: (View) -> Unit)
+    : RecyclerView.Adapter<ModelRecyclerViewAdapter.ViewHolder>(), AnkoLogger {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_library, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(idView, parent, false)
+
         return ViewHolder(view)
     }
 
@@ -23,11 +22,9 @@ class BookRecyclerViewAdapter(private val mValues: List<Book>)
         holder.mItem = mValues.get(index = position)
         holder.mTextView.text = mValues[position].name
 
-//        Glide.with(holder.mView).load(mValues[position].image).into(holder.mImageView)
+        //Glide.with(holder.mView).load(mValues[position].image).into(holder.mImageView)
 
-        holder.mView.setOnClickListener {
-            info { "ITEM" }
-        }
+        holder.mView.setOnClickListener(onClick)
     }
 
     override fun getItemCount(): Int {
@@ -35,12 +32,12 @@ class BookRecyclerViewAdapter(private val mValues: List<Book>)
     }
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mTextView = mView.findViewById<View>(R.id.content) as TextView
-        val mImageView = mView.findViewById<View>(R.id.imageView) as ImageView
-        var mItem: Book? = null
+        val mTextView = mView.findViewWithTag<View>("text") as TextView
+        val mImageView = mView.findViewWithTag<View>("image") as ImageView
+        var mItem: AppModel? = null
 
         override fun toString(): String {
-            return super.toString() + " '" + mTextView.text + "'"
+            return super.toString() + " '" + mItem?.name + "'"
         }
     }
 }
