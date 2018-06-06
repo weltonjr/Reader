@@ -22,22 +22,16 @@ class HomeFragment : Fragment(), AnkoLogger {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_home, container, false)
-        //todo mudar fragment layout
+
         if (view is RecyclerView) {
             val context = view.getContext()
 
             view.layoutManager = GridLayoutManager(context, 2)
-            view.adapter = ModelRecyclerViewAdapter(UserManager.getFavs(), R.id.book_item){
+            view.adapter = ModelRecyclerViewAdapter(UserManager.favs, R.layout.fragment_book){
                 //chamar activity
                 info { "Click" }
             }
         }
         return view
-    }
-
-    companion object {
-        fun newInstance(): HomeFragment {
-            return HomeFragment()
-        }
     }
 }

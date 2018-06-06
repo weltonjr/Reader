@@ -13,19 +13,19 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.navigation_home -> {
                 supportFragmentManager.inTransaction {
-                    add(R.id.mainFrameLayout, HomeFragment.newInstance(), HomeFragment::class.simpleName)
+                    replace(R.id.mainFrameLayout, HomeFragment(), HomeFragment::class.simpleName)
                 }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
                 supportFragmentManager.inTransaction {
-                    add(R.id.mainFrameLayout, LibraryFragment.newInstance(), LibraryFragment::class.simpleName)
+                    replace(R.id.mainFrameLayout, LibraryFragment(), LibraryFragment::class.simpleName)
                 }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
                 supportFragmentManager.inTransaction {
-                    add(R.id.mainFrameLayout, SettingsFragment(), SettingsFragment::class.simpleName)
+                    replace(R.id.mainFrameLayout, SettingsFragment(), SettingsFragment::class.simpleName)
                 }
                 return@OnNavigationItemSelectedListener true
             }
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         supportFragmentManager.inTransaction {
-            add(R.id.mainFrameLayout, HomeFragment.newInstance(), HomeFragment::class.simpleName)
+            add(R.id.mainFrameLayout, HomeFragment(), HomeFragment::class.simpleName)
         }
 
     }

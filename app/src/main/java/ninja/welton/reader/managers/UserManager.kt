@@ -8,8 +8,7 @@ object UserManager {
         ""
     }
 
-    fun getFavs(): List<Book>{
-
-        return BookManager.getBooks()
+    val favs by lazy{
+        BookManager.books
     }
 }

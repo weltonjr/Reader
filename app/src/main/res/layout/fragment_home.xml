@@ -9,4 +9,4 @@
 	android:layout_marginStart="4dp"
 	app:layoutManager="GridLayoutManager"
 	tools:context="ninja.welton.reader.MainActivity"
-	tools:listitem="@layout/fragment_library" />
+	tools:listitem="@layout/fragment_book" />

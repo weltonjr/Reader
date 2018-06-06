@@ -9,11 +9,11 @@ import android.widget.TextView
 import ninja.welton.reader.models.AppModel
 import org.jetbrains.anko.AnkoLogger
 
-class ModelRecyclerViewAdapter(private val mValues: List<AppModel>, private val idView: Int, private val onClick: (View) -> Unit)
+class ModelRecyclerViewAdapter(private val mValues: List<AppModel>, private val layoutView: Int, private val onClick: (View) -> Unit)
     : RecyclerView.Adapter<ModelRecyclerViewAdapter.ViewHolder>(), AnkoLogger {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(idView, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(layoutView, parent, false)
 
         return ViewHolder(view)
     }
