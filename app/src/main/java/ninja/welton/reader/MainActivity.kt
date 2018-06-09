@@ -6,8 +6,11 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import ninja.welton.reader.extensions.inTransaction
+import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity() {
+    private var backTimer = 0L
+    private val maxTimeBettwenBackClicks = 2000
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -33,14 +36,28 @@ class MainActivity : AppCompatActivity() {
         false
     }
 
+    override fun onBackPressed() {
+        if(backTimer + maxTimeBettwenBackClicks > System.currentTimeMillis())
+            super.onBackPressed()
+        else {
+            backTimer = System.currentTimeMillis()
+            toast(R.string.click_back_again)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(when(prefs.theme){
+            Themes.Light -> R.style.AppTheme
+            Themes.Dark -> R.style.AppThemeDark
+        })
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         supportFragmentManager.inTransaction {
-            add(R.id.mainFrameLayout, HomeFragment(), HomeFragment::class.simpleName)
+            replace(R.id.mainFrameLayout, HomeFragment(), HomeFragment::class.simpleName)
         }
 
     }

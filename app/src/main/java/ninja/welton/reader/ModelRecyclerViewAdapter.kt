@@ -9,7 +9,7 @@ import android.widget.TextView
 import ninja.welton.reader.models.AppModel
 import org.jetbrains.anko.AnkoLogger
 
-class ModelRecyclerViewAdapter(private val mValues: List<AppModel>, private val layoutView: Int, private val onClick: (View) -> Unit)
+class ModelRecyclerViewAdapter(private val mValues: List<AppModel>, private val layoutView: Int, private val onClick: (View, AppModel) -> Unit)
     : RecyclerView.Adapter<ModelRecyclerViewAdapter.ViewHolder>(), AnkoLogger {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -19,17 +19,21 @@ class ModelRecyclerViewAdapter(private val mValues: List<AppModel>, private val 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.mItem = mValues.get(index = position)
-        holder.mTextView.text = mValues[position].name
+        mValues[position].let{model ->
 
-        //Glide.with(holder.mView).load(mValues[position].image).into(holder.mImageView)
+            holder.mItem = model
+            holder.mTextView.text = model.name
 
-        holder.mView.setOnClickListener(onClick)
+            //todo: carregar imagem
+            model.image?.let {
+                //Glide.with(holder.mView).load(mValues[position].image).into(holder.mImageView)
+            }
+
+            holder.mView.setOnClickListener{ view -> onClick(view, model) }
+        }
     }
 
-    override fun getItemCount(): Int {
-        return mValues.size
-    }
+    override fun getItemCount() = mValues.size
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val mTextView = mView.findViewWithTag<View>("text") as TextView

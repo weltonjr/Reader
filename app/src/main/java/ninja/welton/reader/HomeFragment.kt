@@ -27,9 +27,10 @@ class HomeFragment : Fragment(), AnkoLogger {
             val context = view.getContext()
 
             view.layoutManager = GridLayoutManager(context, 2)
-            view.adapter = ModelRecyclerViewAdapter(UserManager.favs, R.layout.fragment_book){
+            view.adapter = ModelRecyclerViewAdapter(UserManager.favs, R.layout.fragment_book){ _, model ->
                 //chamar activity
-                info { "Click" }
+                info { "Click on ${model.name}" }
+
             }
         }
         return view
