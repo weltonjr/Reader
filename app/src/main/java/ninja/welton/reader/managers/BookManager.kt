@@ -14,7 +14,4 @@ object BookManager {
             Book("Livro 3", "http://lorempixel.com/300/300", false),
             Book("Livro 4f", "http://lorempixel.com/300/300", true))
     }
-
-    val favorites : List<Book>
-        get() = books.filter { it.favorite }
 }

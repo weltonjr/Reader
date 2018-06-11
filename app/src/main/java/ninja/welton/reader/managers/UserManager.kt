@@ -8,7 +8,7 @@ object UserManager {
         ""
     }
 
-    val favs by lazy{
-        BookManager.books
+    val favoriteBooks by lazy{
+        BookManager.books.filter { it.favorite }
     }
 }

@@ -1,4 +1,4 @@
 package ninja.welton.reader.models
 
 
-class Chapter(val title: String, val done: Boolean = false) : AppModel(title, null)
+class Chapter(title: String, val text: String, val done: Boolean = false) : AppModel(title, null)

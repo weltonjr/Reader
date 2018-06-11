@@ -9,14 +9,14 @@ class Book(name: String,
     val chapters by lazy{
         //todo: recuperar baseado no livro
 
-        listOf( Chapter("Capitulo 1"),
-                Chapter("Capitulo 2"),
-                Chapter("Capitulo 3"),
-                Chapter("Capitulo 4"),
-                Chapter("Capitulo 5"),
-                Chapter("Capitulo 6"),
-                Chapter("Capitulo 7"),
-                Chapter("Capitulo 8"))
+        listOf( Chapter("Capitulo 1", "lorem ipsum"),
+                Chapter("Capitulo 2", "lorem ipsum"),
+                Chapter("Capitulo 3", "lorem ipsum"),
+                Chapter("Capitulo 4", "lorem ipsum"),
+                Chapter("Capitulo 5", "lorem ipsum"),
+                Chapter("Capitulo 6", "lorem ipsum"),
+                Chapter("Capitulo 7", "lorem ipsum"),
+                Chapter("Capitulo 8", "lorem ipsum"))
 
     }
 

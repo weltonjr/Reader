@@ -37,7 +37,7 @@ class ModelRecyclerViewAdapter(private val mValues: List<AppModel>, private val 
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val mTextView = mView.findViewWithTag<View>("text") as TextView
-        val mImageView = mView.findViewWithTag<View>("image") as ImageView
+        val mImageView = mView.findViewWithTag<View>("image") as? ImageView
         var mItem: AppModel? = null
 
         override fun toString(): String {

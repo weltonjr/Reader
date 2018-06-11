@@ -1,15 +1,14 @@
 package ninja.welton.reader
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ninja.welton.reader.managers.BookManager
 import ninja.welton.reader.managers.UserManager
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -26,11 +25,14 @@ class HomeFragment : Fragment(), AnkoLogger {
         if (view is RecyclerView) {
             val context = view.getContext()
 
-            view.layoutManager = GridLayoutManager(context, 2)
-            view.adapter = ModelRecyclerViewAdapter(UserManager.favs, R.layout.fragment_book){ _, model ->
+            view.layoutManager = GridLayoutManager(context, 3)
+            view.adapter = ModelRecyclerViewAdapter(UserManager.favoriteBooks, R.layout.item_book){ _, model ->
                 //chamar activity
                 info { "Click on ${model.name}" }
 
+                activity.startActivity(Intent(activity, BookActivity::class.java).also {
+                    it.putExtra("model", model.name)
+                })
             }
         }
         return view

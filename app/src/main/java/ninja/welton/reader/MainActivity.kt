@@ -10,7 +10,7 @@ import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity() {
     private var backTimer = 0L
-    private val maxTimeBettwenBackClicks = 2000
+    private val maxTimeBettwenBackClicks = 2000L
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if(backTimer + maxTimeBettwenBackClicks > System.currentTimeMillis())
-            super.onBackPressed()
+            super.onBackPressed();
         else {
             backTimer = System.currentTimeMillis()
             toast(R.string.click_back_again)
@@ -50,14 +50,17 @@ class MainActivity : AppCompatActivity() {
             Themes.Light -> R.style.AppTheme
             Themes.Dark -> R.style.AppThemeDark
         })
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         supportFragmentManager.inTransaction {
-            replace(R.id.mainFrameLayout, HomeFragment(), HomeFragment::class.simpleName)
+            if(intent.extras != null && intent.extras.getBoolean("themeChange", false)) {    //Se for troca de tema, avança pro fragmento de configurações
+                replace(R.id.mainFrameLayout, SettingsFragment(), SettingsFragment::class.simpleName)
+                //todo: mudar seleção na navegação inferior
+            }else
+                replace(R.id.mainFrameLayout, HomeFragment(), HomeFragment::class.simpleName)
         }
 
     }

@@ -7,4 +7,4 @@
 	android:layout_height="match_parent"
 	app:layoutManager="GridLayoutManager"
 	tools:context="ninja.welton.reader.MainActivity"
-	tools:listitem="@layout/fragment_book" />
+	tools:listitem="@layout/item_book" />
