@@ -31,7 +31,7 @@ class HomeFragment : Fragment(), AnkoLogger {
                 info { "Click on ${model.name}" }
 
                 activity.startActivity(Intent(activity, BookActivity::class.java).also {
-                    it.putExtra("model", model.name)
+                    it.putExtra("book", model.name)
                 })
             }
         }

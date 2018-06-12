@@ -21,20 +21,21 @@ class BookActivity : AppCompatActivity(), AnkoLogger {
 
         intent.extras?.let{
 
-            it.getString("model", null)?.let{ modelName ->
+            it.getString("book", null)?.let{ modelName ->
 
-                BookManager.books.find { it.name == modelName }?.let{model ->
+                BookManager.books.find { it.name == modelName }?.let{book ->
 
                     //app_bar_image
-                    toolbar.title = model.name
+                    toolbar.title = book.name
 
                     bookRecyclerView.layoutManager = LinearLayoutManager(this)
-                    bookRecyclerView.adapter = ModelRecyclerViewAdapter(model.chapters, R.layout.item_chapter) { _, chapter ->
+                    bookRecyclerView.adapter = ModelRecyclerViewAdapter(book.chapters, R.layout.item_chapter) { _, chapter ->
                         //chamar activity
                         info { "Click on ${chapter.name}" }
 
                         startActivity(Intent(this, BookActivity::class.java).also {
-                            it.putExtra("model", chapter.name)
+                            it.putExtra("book", book.name)
+                            it.putExtra("chapter", chapter.name)
                         })
                     }
                 }

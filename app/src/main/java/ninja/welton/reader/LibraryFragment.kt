@@ -26,12 +26,12 @@ class LibraryFragment : Fragment(), AnkoLogger {
             val context = view.getContext()
 
             view.layoutManager = GridLayoutManager(context, 3)
-            view.adapter = ModelRecyclerViewAdapter(LibraryManager.itens, R.layout.item_book){ _, model ->
+            view.adapter = ModelRecyclerViewAdapter(LibraryManager.libraries, R.layout.item_book){ _, model ->
                 //chamar activity
                 info { "Click on ${model.name}" }
 
                 activity.startActivity(Intent(activity, BookActivity::class.java).also {
-                    it.putExtra("model", model.name)
+                    it.putExtra("library", model.name)
                 })
             }
         }

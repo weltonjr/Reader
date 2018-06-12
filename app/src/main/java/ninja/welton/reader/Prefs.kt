@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 
 private const val PREFS_FILENAME = "ninja.welton.classLog.prefs"
 private const val THEME = "theme"
+private const val FAVORITES = "favorites"
 
 class Prefs (context: Context) {
 
@@ -13,9 +14,13 @@ class Prefs (context: Context) {
     var theme: Themes
         get() = Themes.valueOf( prefs.getString(THEME, Themes.Light.name))
         set(value) = prefs.edit().putString(THEME, value.name).apply()
+
+    var favoriteBooks: List<String>
+        get() = prefs.getString(FAVORITES, "").split(',')
+        set(value) = prefs.edit().putString(FAVORITES, value.joinToString(",")).apply()
 }
 
-public enum class Themes{
+enum class Themes{
     Light,
     Dark
 }

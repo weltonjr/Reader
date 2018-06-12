@@ -1,25 +1,15 @@
 package ninja.welton.reader.models
 
-
-class Book(name: String,
-           image: String,
-           var favorite: Boolean = false) : AppModel(name, image){
+import ninja.welton.reader.managers.ChapterManager
 
 
-    val chapters by lazy{
-        //todo: recuperar baseado no livro
+class Book(id: Int,
+           name: String,
+           image: String) : AppModel(id, name, image) {
 
-        listOf( Chapter("Capitulo 1", "lorem ipsum"),
-                Chapter("Capitulo 2", "lorem ipsum"),
-                Chapter("Capitulo 3", "lorem ipsum"),
-                Chapter("Capitulo 4", "lorem ipsum"),
-                Chapter("Capitulo 5", "lorem ipsum"),
-                Chapter("Capitulo 6", "lorem ipsum"),
-                Chapter("Capitulo 7", "lorem ipsum"),
-                Chapter("Capitulo 8", "lorem ipsum"))
 
+    val chapters by lazy {
+        ChapterManager.getByBook(id)
     }
-
-
 
 }
