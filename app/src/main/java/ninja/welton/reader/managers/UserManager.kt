@@ -1,6 +1,5 @@
 package ninja.welton.reader.managers
 
-import ninja.welton.reader.models.Book
 import ninja.welton.reader.prefs
 
 
@@ -22,6 +21,6 @@ object UserManager {
         prefs.favoriteBooks = favorites
     }
 
-    fun favoriteBooks() = BookManager.getByIds(prefs.favoriteBooks.map { it.toInt() })
+    fun favoriteBooks() = BookManager.getByIds(prefs.favoriteBooks.filter { it != "" }.map { it.toInt() })
 
 }

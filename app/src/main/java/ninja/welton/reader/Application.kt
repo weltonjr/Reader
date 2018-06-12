@@ -1,12 +1,16 @@
 package ninja.welton.reader
 
 import android.app.Application
-import com.google.firebase.auth.FirebaseAuth
+
+//import com.google.firebase.auth.FirebaseAuth
+
+const val API = "http://welton.ninja/umbraco/surface/Reader"
+const val IMAGE = "http://welton.ninja"
 
 class App : Application() {
     companion object {
         var prefs: Prefs? = null
-        var auth: FirebaseAuth? = null
+//        var auth: FirebaseAuth? = null
     }
 
     override fun onCreate() {

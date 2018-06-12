@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ninja.welton.reader.managers.UserManager
+import ninja.welton.reader.managers.BookManager
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
@@ -26,12 +26,12 @@ class HomeFragment : Fragment(), AnkoLogger {
             val context = view.getContext()
 
             view.layoutManager = GridLayoutManager(context, 3)
-            view.adapter = ModelRecyclerViewAdapter(UserManager.favoriteBooks, R.layout.item_book){ _, model ->
+            view.adapter = ModelRecyclerViewAdapter(BookManager.getByLibrary(1063), R.layout.item_book){ _, model ->
                 //chamar activity
                 info { "Click on ${model.name}" }
 
-                activity.startActivity(Intent(activity, BookActivity::class.java).also {
-                    it.putExtra("book", model.name)
+                activity?.startActivity(Intent(activity, BookActivity::class.java).also {
+                    it.putExtra("book", model.id)
                 })
             }
         }

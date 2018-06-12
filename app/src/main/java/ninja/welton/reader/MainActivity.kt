@@ -21,9 +21,9 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                supportFragmentManager.inTransaction {
-                    replace(R.id.mainFrameLayout, LibraryFragment(), LibraryFragment::class.simpleName)
-                }
+//                supportFragmentManager.inTransaction {
+//                    replace(R.id.mainFrameLayout, LibraryFragment(), LibraryFragment::class.simpleName)
+//                }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {

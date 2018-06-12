@@ -1,28 +1,60 @@
 package ninja.welton.reader.managers
 
+import android.os.StrictMode
+import com.github.kittinunf.fuel.android.core.Json
+import com.github.kittinunf.fuel.android.extension.responseJson
+import com.github.kittinunf.fuel.core.FuelError
+import com.github.kittinunf.fuel.httpGet
+import com.github.kittinunf.result.Result
+import ninja.welton.reader.API
+import ninja.welton.reader.extensions.iterator
 import ninja.welton.reader.models.Book
-import ninja.welton.reader.models.Chapter
 
 
 object BookManager {
 
     fun getByLibrary(idLibrary: Int): List<Book> {
-        return listOf(
-                Book(0,"Livro 1f", "http://lorempixel.com/300/300"),
-                Book(1,"Livro 2", "http://lorempixel.com/300/300"),
-                Book(2,"Livro 3", "http://lorempixel.com/300/300"),
-                Book(3,"Livro 4f", "http://lorempixel.com/300/300"))
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
+        val (_, _, result: Result<Json, FuelError>) = "$API/GetLibraryBooks?id=$idLibrary".httpGet().responseJson()
+
+        val json = result.component1()?.array()
+
+        var list = emptyList<Book>()
+
+        if(json != null){
+            for(item in json){
+                list += Book(item.getInt("Id"), item.getString("Name"), item.getString("Imagem1"), item.getString("Imagem2"))
+            }
+        }
+        return list
     }
 
-    fun getById(idBook: Int): Book {
-        return Book(0,"Livro 1f", "http://lorempixel.com/300/300")
+    fun getById(idBook: Int): Book? {
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
+        val (_, _, result: Result<Json, FuelError>) = "$API/GetBook?id=$idBook".httpGet().responseJson()
+
+        val json = result.component1()?.obj()
+
+        return if(json == null) null else Book(json.getInt("Id"), json.getString("Name"), json.getString("Imagem1"), json.getString("Imagem2"))
     }
 
     fun getByIds(ids: List<Int>): List<Book> {
-        return listOf(
-                Book(0,"Livro 1f", "http://lorempixel.com/300/300"),
-                Book(1,"Livro 2", "http://lorempixel.com/300/300"),
-                Book(2,"Livro 3", "http://lorempixel.com/300/300"),
-                Book(3,"Livro 4f", "http://lorempixel.com/300/300"))
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
+        //todo: falta fazer
+        val (_, _, result: Result<Json, FuelError>) = "$API/GetBooks".httpGet().responseJson()
+
+        val json = result.component1()?.array()
+
+        var list = emptyList<Book>()
+
+        if(json != null){
+            for(item in json){
+                list += Book(item.getInt("Id"), item.getString("Name"), item.getString("Imagem1"), item.getString("Imagem2"))
+            }
+        }
+        return list
     }
 }
